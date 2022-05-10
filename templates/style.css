@@ -1,0 +1,46 @@
+/* Style for index.html */
+.navigation{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.mynavitem{
+    text-decoration: none;
+    color: white;
+    font-size: larger;
+}
+.mynavitem:hover{
+    font-weight: bolder;
+    color: azure;
+}
+.home_bg_img{
+    position: absolute;
+     left: 0px;
+    top: 0px;
+    width: 100%; 
+    z-index: 0;
+    filter: brightness(50%)
+   
+}
+
+
+
+@media only screen and (min-width: 992px) {
+    .mynavitems{
+        /* float: right;
+        flex: none; */
+        position: fixed;
+    right: 2%;
+    }
+    .nav_element_group{
+        position: fixed;
+        padding-top: 5%;
+    }
+    .navigation{
+        background-color: blue;
+        z-index: 100;
+    }
+   
+}
