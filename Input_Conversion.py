@@ -1,7 +1,27 @@
 import music21 as m21
+import os
 
+path ='D:\\Music Project\\static\\files'
 
-filename="input_med.mid"
+#This function is finding the latest uploaded file on the server
+def newest(path):
+    files = os.listdir(path)
+    paths = [os.path.join(path, basename) for basename in files]
+    return max(paths, key=os.path.getctime)
+
+# This will check if not a single file occur in the files folder send a demo input
+try:
+    filename=newest(path)
+    # key = filename.analyze('key')
+    # print(key.tonic.name, key.mode)
+
+    #print("All is well")
+except ValueError:
+    print("Value error")
+    # filename="mel.mid"
+
+#make this function parameterized
+
 def parse_m21():
     song = m21.converter.parse(filename)
     return song
@@ -81,6 +101,7 @@ def main():
     transposed_song=transpose(input_song)
     encoded_song=encode_song(transposed_song)
     print(encoded_song)
+
     #seed=encoded_song
 
 

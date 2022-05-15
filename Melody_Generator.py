@@ -5,7 +5,7 @@ import music21 as m21
 from preprocess import SEQUENCE_LENGTH, MAPPING_PATH
 from Input_Conversion import encode_song,parse_m21,transpose
 
-filename="input_med.mid"
+
 class MelodyGenerator:
     """A class that wraps the LSTM model and offers utilities to generate melodies."""
 
@@ -67,6 +67,8 @@ class MelodyGenerator:
             # update melody
             melody.append(output_symbol)
 
+
+
         return melody
 
 
@@ -77,16 +79,19 @@ class MelodyGenerator:
             A number closer to 1 makes the generation more unpredictable.
         :return index (int): Selected output symbol
         """
+
         predictions = np.log(probabilites) / temperature
         probabilites = np.exp(predictions) / np.sum(np.exp(predictions))
-
+        # print("Probabilities",probabilites)
         choices = range(len(probabilites)) # [0, 1, 2, 3]
+        # print("Choices:",choices)
         index = np.random.choice(choices, p=probabilites)
+        # print("Index:",index)
 
         return index
 
 
-    def save_melody(self, melody, step_duration=0.50, format="midi", file_name="mel.mid"):
+    def save_melody(self, melody, step_duration=0.25, format="midi", file_name="D:\Music Project\static\Output\mel.mid"):
         """Converts a melody into a MIDI file
         :param melody (list of str):
         :param min_duration (float): Duration of each time step in quarter length
@@ -130,22 +135,53 @@ class MelodyGenerator:
             else:
                 step_counter += 1
 
+
         # write the m21 stream to a midi file
         stream.write(format, file_name)
 
 
 
-mg = MelodyGenerator()
-# seed = "62 _ _ _ 65 _ _ 60 _ 64 _ 61 _ 62 _ _"
-# seed2 = "67 _ _ _ _ _ 65 _ 64 _ 62 _ 60 _ _ _"
-# input_song=parse_m21();
-# transposed_song=transpose(input_song)
-# encoded_song = encode_song(transposed_song)
-# print(encoded_song)
-# seed = "62 _ _ _ 65 _ _ 60 _ 64 _ 64 _ 62 _ _"
-# seed="r _ _ _ 48 _ _ _ 48 r 52 r r _ 55 _ 50 _ r _ 52 _ _ _ 48 _ _ _"
-seed = "55 _ _ _ 60 _ _ _ 55 _ _ _ 55 _"
-melody = mg.generate_melody(seed, 500, SEQUENCE_LENGTH, 0.7)
-# melody = mg.generate_melody(seed, 400, SEQUENCE_LENGTH, 0.4)
-print(melody)
-mg.save_melody(melody)
+
+# This function will trigger the model to run and save the final output
+def initialize_generator():
+    mg = MelodyGenerator()
+    input_song = parse_m21();
+
+    transposed_song = transpose(input_song)
+    encoded_song = encode_song(transposed_song)
+    seed = check_seed_values(encoded_song)
+    melody = mg.generate_melody(seed, 500, SEQUENCE_LENGTH, 0.7)
+    print("This is melody: ",melody)
+    #melody=['r', '_', '_', '_', '48', '_', 'r', '52', 'r', '55', '52', '59', '57', 'r', '69', '69', '69', '69', '64', '76', '76', '76', '76', '73', '63', '63', '63', '61', '63', '56', '80', '64', '80', '56', '56', '53', '56', '80', '64', '73', '80', '58', '58', '58', '58', '61', '64', '73', '61', '61', '53', '60', '60', '53', '53']
+
+    mg.save_melody(melody)
+
+
+
+
+
+# This function checks that if seed contains any note that is not mapped
+def check_seed_values(seed):
+    demo_seed = "62 _ _ _ 65 _ _ 60 _ 64 _ 61 _ 62 _ _"
+    seed_notes_list = seed.split()
+    approve_list = []
+    print(seed_notes_list)
+    # This dictionary has content from mapping.json
+    mapped_midi_notes = {"74": 0, "_": 1, "68": 2, "66": 3, "76": 4, "71": 5, "78": 6, "53": 7, "52": 8, "56": 9,
+                         "r": 10, "62": 11, "72": 12, "57": 13, "51": 14, "70": 15, "48": 16, "63": 17, "75": 18,
+                         "81": 19, "64": 20, "/": 21, "47": 22, "55": 23, "67": 24, "61": 25, "79": 26, "80": 27,
+                         "65": 28, "60": 29, "54": 30, "45": 31, "58": 32, "73": 33, "50": 34, "59": 35, "69": 36,
+                         "77": 37}
+
+    for note in seed_notes_list:
+        if str(note) in mapped_midi_notes.keys():
+            approve_list.append(1)
+        else:
+            approve_list.append(0)
+    bad_case = approve_list.count(0)
+    if bad_case > 0:
+        seed = demo_seed
+
+    return seed
+
+initialize_generator()
