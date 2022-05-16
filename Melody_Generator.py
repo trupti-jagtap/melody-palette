@@ -181,7 +181,7 @@ def check_seed_values(seed):
     bad_case = approve_list.count(0)
     if bad_case > 0:
         seed = demo_seed
-    seed=demo_seed
+    # seed=demo_seed
     return seed
 
 initialize_generator()
