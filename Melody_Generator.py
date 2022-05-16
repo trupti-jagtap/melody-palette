@@ -91,7 +91,7 @@ class MelodyGenerator:
         return index
 
 
-    def save_melody(self, melody, step_duration=0.25, format="midi", file_name="D:\Music Project\static\Output\mel.mid"):
+    def save_melody(self, melody, step_duration=0.50, format="midi", file_name="D:\Music Project\static\Output\mel.mid"):
         """Converts a melody into a MIDI file
         :param melody (list of str):
         :param min_duration (float): Duration of each time step in quarter length
@@ -150,7 +150,7 @@ def initialize_generator():
     transposed_song = transpose(input_song)
     encoded_song = encode_song(transposed_song)
     seed = check_seed_values(encoded_song)
-    melody = mg.generate_melody(seed, 500, SEQUENCE_LENGTH, 0.7)
+    melody = mg.generate_melody(seed, 100, SEQUENCE_LENGTH, 0.7)
     print("This is melody: ",melody)
     #melody=['r', '_', '_', '_', '48', '_', 'r', '52', 'r', '55', '52', '59', '57', 'r', '69', '69', '69', '69', '64', '76', '76', '76', '76', '73', '63', '63', '63', '61', '63', '56', '80', '64', '80', '56', '56', '53', '56', '80', '64', '73', '80', '58', '58', '58', '58', '61', '64', '73', '61', '61', '53', '60', '60', '53', '53']
 
@@ -181,7 +181,7 @@ def check_seed_values(seed):
     bad_case = approve_list.count(0)
     if bad_case > 0:
         seed = demo_seed
-
+    seed=demo_seed
     return seed
 
 initialize_generator()
