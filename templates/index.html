@@ -76,21 +76,22 @@
     <div class="card upload-card">
 
 
-      <h2>Generate Your Own Melody</h2>
-        <form method='POST' enctype='multipart/form-data' style="background-color:blue">
-      <h3>Choose A File</h3>
+      <h2 class="pb-3">Generate Your Own Melody</h2>
+        <form method='POST' enctype='multipart/form-data' >
+      <h4 class="p-3" id="upload-tag">Upload your sample music</h4>
         {{form.hidden_tag()}}
-        {{form.file()}}
-        {{form.submit(class="upload-button")}}
+        <div class="rectangle-div" id="upload">{{form.file()}}
+        {{form.submit(class="upload-button rounded-button" , onclick="hideMe()")}}</div>
     </form>
-      {% if response %}
+      <!-- {% if response %} -->
 
       <form action="/download/" method="post">
-    <button name="forwardBtn" type="submit"  class="upload-button">Download</button>
+        <h4 class="m-2">Your melody is ready!!</h4>
+    <button name="forwardBtn" type="submit"  class="download-button rounded-button" id="download" onclick="showAnother()">Download</button>
 </form>
 
-
- {% endif %}
+<div class="download-button rounded-button" id="another">Create another melody</div>
+ <!-- {% endif %} -->
   
     </div>
 
@@ -120,7 +121,24 @@
     -->
 
   <script>
-
+    function hideMe() {
+  var uploadDiv = document.getElementById("upload");
+  var uploadH3= document.getElementById("upload-tag");
+  if (uploadDiv.style.display === "none" && uploadH3.style.display==="none") {
+    uploadDiv = "block";
+    uploadH3.style.display="block";
+  } else {
+    uploadDiv.style.display = "none";
+    uploadH3.style.display="none";
+  }
+}
+function showAnother()
+{
+  var x=document.getElementById("another");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } 
+}
   </script>
 </body>
 

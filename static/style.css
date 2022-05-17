@@ -8,8 +8,12 @@ html {
       background:rgba(0, 0, 0, 0.68);
     background-image: linear-gradient(to right bottom,#0f052b, #001951, #7a0072,#310059);
     background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+  
+    background-attachment: fixed;
   }
-  h1,h2,h3{
+  h1,h2,h3,h4{
       color: white;
   }
 /* Style for index.html */
@@ -80,11 +84,28 @@ html {
 .upload-button{
     padding: 1% 4%;
     background-color: white;
-    border: solid 2px saddlebrown;
     font-size: medium;
     font-weight: 700;
-    margin:30%;
+    /* margin:30%; */
 }
+.upload-button:hover{
+    border: solid 1px white;
+    background-color: #b137a9;
+    color:white
+}
+.download-button{
+    padding: 1% 4%;
+    background-color: white;
+    font-size: medium;
+    font-weight: 700;
+    margin: 1%;
+}
+.download-button:hover{
+    border: solid 1px white;
+    background-color: #b137a9;
+    color:white
+}
+
 .top-text-button:hover{
    
     background-color: whitesmoke;
@@ -93,12 +114,26 @@ html {
 } 
 .upload-card
 {
-    background: yellow;
+    background: #0d081a;
     padding-inline: 14%;
     text-align: center;
-    padding-top: 6%;
+    padding: 9% 8%;
+    border-radius: 7px;
 }
 
+.rounded-button{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+.rectangle-div{
+ background-color: transparent;  
+ color: white; 
+}
+#another{
+    display: none;
+}
 @media only screen and (min-width: 992px) {
      .mynavitems{
     flex-grow:unset;
