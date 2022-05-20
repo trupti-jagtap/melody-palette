@@ -1,23 +1,52 @@
 /* Global */
-
 /*Basically, add html height 100%. This will stretch your gradient.*/
 html {
-    height:100%;
-  }
-  body {
-      background:rgba(0, 0, 0, 0.68);
-    background-image: linear-gradient(to right bottom,#0f052b, #001951, #7a0072,#310059);
-    background-repeat: no-repeat;
+    height: 100%;
+}
+
+/* Body color is set to change with linear gradient */
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background: rgba(0, 0, 0, 0.68);
+    background: linear-gradient(-45deg, #af03ff, #9b1146, #53006c, #0d29c7, #00ecb5);
+    background-size: 400% 400%;
+    /*background-repeat: no-repeat;*/
     height: 100%;
     margin: 0;
-  
+    animation: gradient 15s ease infinite;
     background-attachment: fixed;
-  }
-  h1,h2,h3,h4{
-      color: white;
-  }
+}
+
+/* This helps to color to move in the background */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+h1,
+h2,
+h3,
+h4 {
+    color: white;
+}
+
+h5 {
+    font-weight: 600;
+}
+/* ***********************************End of Global****************************** */
 /* Style for index.html */
-.navigation{
+/* Navigation Bar */
+.navigation {
     position: sticky;
     top: 0;
     z-index: 100;
@@ -25,130 +54,450 @@ html {
     padding-bottom: 0%;
 }
 
+.nav-hr {
+    margin: 0;
+    color: white;
+    height: 1px;
+}
 
-.mynavitem{
+.mynavitem {
     text-decoration: none;
     color: white;
     font-size: larger;
 }
-.mynavitem:hover{
+
+.mynavitem:hover {
     font-weight: bolder;
     color: azure;
 }
-.home_bg_img{
-    position: absolute;
-     left: 0px;
-    top: 0px;
-    width: 100%; 
-    z-index: -1;
-    filter: brightness(50%)
-   
-}
-/* .nav_element_group{
-    background: #2e0c06;
-    
-} */
-.mylogo{
+
+.mylogo {
     color: white;
     letter-spacing: 3px;
     font-style: normal;
-    
-}
-.mylogo:hover{
-    color: white;
-    font-weight: 600;
-    
-    
+
 }
 
-.top-text-h1{
+.mylogo:hover {
+    color: white;
+    font-weight: 600;
+
+
+}
+/* **************************************End of Navigation Bar****************************************** */
+/* Top section of the site */
+
+.top-text-h1 {
     font-size: -webkit-xxx-large;
     font-weight: 400;
 }
-.top-text-h2{
+
+.top-text-h2 {
     font-size: large;
     font-weight: 300;
 }
-.top-text-side{
+
+.top-text-side {
     color: white;
-    width: 47%;
+    width: 42%;
+    text-align: center;
+    margin: auto;
 }
-.top-text-button{
-    padding: 1% 4%;
-    background-color: white;
-    border: solid 2px saddlebrown;
-    font-size: medium;
-    font-weight: 700;
-    
+.top-hr {
+    margin: 3% 0%;
+    color: white;
+    height: 1px;
 }
-.upload-button{
+
+
+/* Upload and download section */
+/* Upload Section */
+.upload-button {
     padding: 1% 4%;
     background-color: white;
     font-size: medium;
     font-weight: 700;
     /* margin:30%; */
 }
-.upload-button:hover{
-    border: solid 1px white;
-    background-color: #b137a9;
-    color:white
+.upload-button:hover {
+    border: solid 2px white;
+    background-color: transparent;
+    color: white
 }
-.download-button{
+.upload-card {
+    background: #26272b;
+    padding-inline: 14%;
+    text-align: center;
+    padding: 9% 8%;
+    border-radius: 7px;
+    margin-bottom: 7%;
+}
+
+.rectangle-div {
+    background-color: transparent;
+    color: white;
+}
+/* This css is used for giving round shape to buttons */
+.rounded-button {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+/* Download Section */
+.download-button {
     padding: 1% 4%;
     background-color: white;
     font-size: medium;
     font-weight: 700;
     margin: 1%;
 }
-.download-button:hover{
-    border: solid 1px white;
-    background-color: #b137a9;
-    color:white
+
+.download-button:hover {
+    border: solid 2px white;
+    background-color: transparent;
+    color: white
 }
 
-.top-text-button:hover{
-   
-    background-color: whitesmoke;
-    border: solid 2px black;
-    
-} 
-.upload-card
-{
-    background: #0d081a;
-    padding-inline: 14%;
+
+/* User Guide Section */
+
+.user-guide-row {
+    margin-bottom: 4%;
+}
+
+.step-card:hover {
+    background-color: #26272b;
+    border: none;
+}
+
+.step-div {
+    margin-bottom: 2%;
     text-align: center;
-    padding: 9% 8%;
-    border-radius: 7px;
+    font-weight: 700;
 }
 
-.rounded-button{
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+.third-party-link {
+    color: rgb(252, 255, 74);
+    text-decoration: none;
 }
-.rectangle-div{
- background-color: transparent;  
- color: white; 
-}
-#another{
-    display: none;
-}
+/*******************************************End of Common CSS for all screen size*******************************/
+/* Desktop size  */
 @media only screen and (min-width: 992px) {
-     .mynavitems{
-    flex-grow:unset;
+    /*Navigation Bar for desktop*/
+    .mynavitems {
+        flex-grow: unset;
     }
-  
-    .nav_element_group{
+
+    .nav_element_group {
         /* background: #2e0c06; */
         opacity: 99%;
         padding-bottom: 1%;
         height: 24%;
         padding-top: 1%;
     }
-    /* .top-text-div{
-        padding-inline-start: 27rem;
+    /*Top Section Desktop*/
+    .top-text-button {
+        padding: 3% 7%;
+        background-color: white;
+        font-size: medium;
+        font-weight: 700;
+        margin-right: 54%;
+        color: darkblue;
+
+    }
+
+    .top-text-button:hover {
+
+        border: solid 2px white;
+        background-color: transparent;
+        color: white
+    }
+
+    .top-container {
+        width: 77%;
         text-align: center;
-    } */
-   
+        /* margin-left: 29%; */
+    }
+    /*User Guide Desktop*/
+    .user-guide-row {
+        margin-bottom: 4%;
+    }
+
+    .step-card {
+        padding: 6%;
+        background: transparent;
+        border: solid 2px white;
+        color: white;
+        height: 18rem;
+    }
+
+    .step-card:hover {
+        background-color: #26272b;
+        border: none;
+    }
+
+    .step-div {
+        margin-bottom: 2%;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .third-party-link {
+        color: rgb(252, 255, 74);
+        text-decoration: none;
+    }
+
+    .step-card {
+        padding: 6%;
+        background: transparent;
+        border: solid 2px white;
+        color: white;
+        height: 18rem;
+    }
+
 }
+/***************************************End of CSS for Desktop Size Screen****************************************/
+
+/* For Phone Screen*/
+@media(max-width:767px) {
+    /*Navbar Section Phone Screen*/
+    .piano-logo {
+        height: 45px;
+        margin: 1px;
+    }
+    /*Top Section Phone Screen*/
+    .top-text-side {
+        color: white;
+        width: 100%;
+    }
+
+    .top-text-h1 {
+        font-size: xx-large;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .music-icon-1 {
+        margin: 1% 36%;
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .top-text-button {
+        margin: 3% 35%;
+        background-color: white;
+    }
+    /*Upload & download button phone screen*/
+    .upload-button {
+        padding: 1% 4%;
+        background-color: white;
+        font-size: medium;
+        font-weight: 700;
+        margin: 8% 0%;
+    }
+
+    .upload-button:hover {
+        border: solid 2px white;
+        background-color: transparent;
+        color: white
+    }
+
+    .download-button {
+        padding: 1% 4%;
+        background-color: white;
+        font-size: medium;
+        font-weight: 700;
+        margin: 1%;
+    }
+
+    .download-button:hover {
+        border: solid 2px white;
+        background-color: transparent;
+        color: white
+    }
+    /* User Guide Phone Screen*/
+    .step-card {
+        padding: 6%;
+        background: transparent;
+        border: solid 1px;
+        color: white;
+        height: 20rem;
+        margin: 3% 3%;
+    }
+
+
+}
+/**************************************End of CSS for Phone Screen*************************************/
+/*CSS for Footer*/
+.site-footer {
+    background-color: #26272b;
+    padding: 45px 0 20px;
+    font-size: 20x;
+    line-height: 24px;
+    color: #737373;
+}
+
+.site-footer hr {
+    border-top-color: #bbb;
+    opacity: 0.5
+}
+
+.site-footer hr.small {
+    margin: 20px 0
+}
+
+.site-footer h6 {
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 2px
+}
+
+.site-footer a {
+    color: #737373;
+}
+
+.site-footer a:hover {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.footer-links {
+    padding-left: 0;
+    list-style: none
+}
+
+.footer-links li {
+    display: block
+}
+
+.footer-links a {
+    color: #737373
+}
+
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.footer-links.inline li {
+    display: inline-block
+}
+
+.site-footer .social-icons {
+    text-align: right
+}
+
+.site-footer .social-icons a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 6px;
+    margin-right: 0;
+    border-radius: 100%;
+    background-color: #33353d
+}
+
+.copyright-text {
+    margin: 0
+}
+
+.about-title {
+    text-align: center;
+}
+
+@media (max-width:991px) {
+    .site-footer [class^=col-] {
+        margin-bottom: 30px
+    }
+}
+
+@media (max-width:767px) {
+    .site-footer {
+        padding-bottom: 0
+    }
+
+    .site-footer .copyright-text,
+    .site-footer .social-icons {
+        text-align: center
+    }
+}
+
+.social-icons {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-bottom: 4px
+}
+
+.social-icons li.title {
+    margin-right: 15px;
+    text-transform: uppercase;
+    color: #96a2b2;
+    font-weight: 700;
+    font-size: 13px
+}
+
+.social-icons a {
+    background-color: #eceeef;
+    color: #818a91;
+    font-size: 16px;
+    display: inline-block;
+    line-height: 44px;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 100%;
+    -webkit-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear
+}
+
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+    color: #fff;
+    background-color: #29aafe
+}
+
+.social-icons.size-sm a {
+    line-height: 34px;
+    height: 34px;
+    width: 34px;
+    font-size: 14px
+}
+
+.social-icons a.facebook:hover {
+    background-color: #3b5998
+}
+
+.social-icons a.twitter:hover {
+    background-color: #00aced
+}
+
+.social-icons a.linkedin:hover {
+    background-color: #007bb6
+}
+
+.social-icons a.dribbble:hover {
+    background-color: #ea4c89
+}
+
+@media (max-width:767px) {
+    .social-icons li.title {
+        display: block;
+        margin-right: 0;
+        font-weight: 600
+    }
+}
+/*End*/
