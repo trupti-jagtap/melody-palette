@@ -5,10 +5,9 @@ from werkzeug.utils import secure_filename
 import os
 from wtforms.validators import InputRequired
 from Melody_Generator import initialize_generator
-
 app = Flask(__name__)
 
-DOWNLOAD_FOLDER='static/output/mel.mid'
+
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/files'
 ALLOWED_EXTENSIONS = {'mid'}
@@ -30,7 +29,7 @@ def home():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data # First grab the file
-        print("Input FIle is",file)
+        print("Input File is",file)
         if allowed_file(file.filename):
             file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
             initialize_generator()
@@ -46,7 +45,9 @@ def home():
 
 @app.route("/download/",methods=['POST'])
 def return_files_tut():
+    DOWNLOAD_FOLDER = 'static/output/mel.mid'
     file_path=DOWNLOAD_FOLDER
+
     return send_file(file_path, as_attachment=True, attachment_filename='result.midi')
 
 if __name__ == '__main__':

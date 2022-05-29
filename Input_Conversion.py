@@ -14,8 +14,8 @@ try:
     filename=newest(path)
     # key = filename.analyze('key')
     # print(key.tonic.name, key.mode)
-
-    #print("All is well")
+    print("Filename is:",filename)
+    print("All is well")
 except ValueError:
     print("Value error")
     # filename="mel.mid"
@@ -24,7 +24,10 @@ except ValueError:
 
 def parse_m21():
     song = m21.converter.parse(filename)
-    return song
+    key = song.analyze('key')
+    print("Key is:",key)
+    print(key.tonic.name, key.mode)
+    return (song,key)
 #Input a midi file
 
 #Convert it into numbers
@@ -97,7 +100,7 @@ def encode_song(song, time_step=0.25):
     return encoded_song
 
 def main():
-    input_song=parse_m21();
+    input_song,key=parse_m21();
     transposed_song=transpose(input_song)
     encoded_song=encode_song(transposed_song)
     print(encoded_song)

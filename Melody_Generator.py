@@ -1,4 +1,6 @@
 import json
+import random
+
 import numpy as np
 from tensorflow import keras
 import music21 as m21
@@ -91,7 +93,7 @@ class MelodyGenerator:
         return index
 
 
-    def save_melody(self, melody, step_duration=0.50, format="midi", file_name="D:\Music Project\static\Output\mel.mid"):
+    def save_melody(self, melody, step_duration, format="midi", file_name="D:\Music Project\static\Output\mel.mid"):
         """Converts a melody into a MIDI file
         :param melody (list of str):
         :param min_duration (float): Duration of each time step in quarter length
@@ -145,16 +147,24 @@ class MelodyGenerator:
 # This function will trigger the model to run and save the final output
 def initialize_generator():
     mg = MelodyGenerator()
-    input_song = parse_m21();
+    input_song,key = parse_m21();
 
     transposed_song = transpose(input_song)
     encoded_song = encode_song(transposed_song)
     seed = check_seed_values(encoded_song)
-    melody = mg.generate_melody(seed, 100, SEQUENCE_LENGTH, 0.7)
+    random_temperature_list=[0.3,0.6,0.8,0.9,1]
+    random_num_steps_list=[100,150,200,250]
+    random_temperature = random.choice(random_temperature_list)
+    random_num_steps = random.choice(random_num_steps_list)
+    print("Current temperature:",random_temperature)
+    print("Current num_steps:",random_num_steps)
+    melody = mg.generate_melody(seed, random_num_steps, SEQUENCE_LENGTH,random_temperature)
     print("This is melody: ",melody)
     #melody=['r', '_', '_', '_', '48', '_', 'r', '52', 'r', '55', '52', '59', '57', 'r', '69', '69', '69', '69', '64', '76', '76', '76', '76', '73', '63', '63', '63', '61', '63', '56', '80', '64', '80', '56', '56', '53', '56', '80', '64', '73', '80', '58', '58', '58', '58', '61', '64', '73', '61', '61', '53', '60', '60', '53', '53']
-
-    mg.save_melody(melody)
+    step_duration_list=[0.25,0.5,0.75,1]
+    random_step_durations=random.choice(step_duration_list)
+    print("Current Steps:",random_step_durations)
+    mg.save_melody(melody,random_step_durations)
 
 
 
@@ -180,8 +190,9 @@ def check_seed_values(seed):
             approve_list.append(0)
     bad_case = approve_list.count(0)
     if bad_case > 0:
+        print("bad case")
         seed = demo_seed
     # seed=demo_seed
     return seed
 
-initialize_generator()
+# initialize_generator()
